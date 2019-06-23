@@ -63,6 +63,20 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception e){
             Chat_area.append("开启端口失败\n");
         }
+        Button serverbutton=(Button)findViewById(R.id.button2);
+        serverbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                server server=new server();
+                server.StartServer();
+                Chat_area.append("开始服务器\n");
+                Chat_area.append("将在"+ club.lanhaoo.udpchat_android.server.getIpAddress()+"上广播\n");
+                Chat_area.append("将使用2112作为服务器端口\n");
+            }
+        });
+
+
+
         Button sendButton=(Button)findViewById(R.id.button);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
                                    //todo 接受到的消息都是来自服务端的。。。。
                                    String message_pure = new String(datagramPacket.getData(), 0, datagramPacket.getLength());
+
                                    String fromip = message_pure.split("&")[1];
                                    message_pure = message_pure.split("&")[0];
 
